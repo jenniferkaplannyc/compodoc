@@ -18,4 +18,6 @@ export interface PageInterface {
     pageType?: string;
     component?: any;
     markdown?: string;
+    children?: number;
+    lastChild?: boolean;
 }

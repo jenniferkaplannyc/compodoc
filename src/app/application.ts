@@ -760,6 +760,9 @@ export class Application {
                                 return !isNaN(parseInt(el));
                             });
 
+                            console.log(this.node, this.parent);
+                            console.log('');
+
                             if (typeof file !== 'undefined' && typeof title !== 'undefined') {
                                 const url = cleanNameWithoutSpaceAndToLowerCase(title);
 
@@ -796,6 +799,8 @@ export class Application {
                                         path: finalPath,
                                         additionalPage: markdownFile,
                                         depth: finalDepth.length,
+                                        children: this.node['children'] ? this.node['children'].length : 0,
+                                        lastChild: false,
                                         pageType: COMPODOC_DEFAULTS.PAGE_TYPES.INTERNAL
                                     });
                                 }
@@ -2481,6 +2486,7 @@ at least one config for the 'info' or 'source' tab in --navTabConfig.`);
     public processAdditionalPages() {
         logger.info('Process additional pages');
         let pages = Configuration.mainData.additionalPages;
+        console.log(pages);
         Promise.all(pages.map((page, i) => this.processPage(page)))
             .then(() => {
                 SearchEngine
